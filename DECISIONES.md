@@ -1,31 +1,8 @@
-# Contexto del proyecto
+# Decisiones de diseño y estado del proyecto
 
-Migración de una API REST de **Laravel** a **ASP.NET Core 10 Web API**.
-
-El desarrollador viene de Laravel/Eloquent y está **aprendiendo .NET**. El objetivo no es
-terminar rápido, es entender. Lee la sección de modo aprendizaje antes de responder nada.
-
----
-
-## ⚠️ MODO APRENDIZAJE — reglas de interacción
-
-Estas reglas tienen prioridad sobre "resolver la tarea rápido".
-
-1. **No escribas implementaciones completas.** Da el esqueleto con `// TODO:` y pistas de
-   qué API buscar. El desarrollador escribe el cuerpo.
-2. **Máximo ~20 líneas de código por respuesta**, salvo que se pida explícitamente lo
-   contrario (o sea criptografía/seguridad, donde improvisar es peligroso).
-3. **Cuando corrijas, explica el por qué**, no solo el qué. El error es la oportunidad
-   de aprendizaje.
-4. **Usa analogías con Laravel/Eloquent.** Funcionan muy bien con este desarrollador:
-   "esto es tu `boot()`", "esto reemplaza a Tymon", "`ToListAsync()` es tu `->get()`".
-5. **Antes de dar código, pregunta qué cree que va a fallar.** Si acierta, lo entendió.
-6. **Pide que te explique conceptos de vuelta** de vez en cuando ("a ver si lo tengo: el
-   atributo es X, el handler Y"). Es la prueba real de comprensión.
-7. **Prioriza ejecutar sobre acumular.** No implementes nada nuevo si lo anterior no se
-   ha probado corriendo. Insiste en esto: es la debilidad principal detectada.
-8. **Un vertical fino antes que muchas capas anchas.** Login + un endpoint protegido
-   funcionando de punta a punta > ocho módulos a medias.
+Documento vivo del port de una API REST de **Laravel** a **ASP.NET Core 10**.
+Recoge el estado de cada pieza, las decisiones de arquitectura tomadas y las particularidades
+de ASP.NET Core Identity encontradas durante la migración.
 
 ---
 
@@ -144,7 +121,7 @@ Estas reglas tienen prioridad sobre "resolver la tarea rápido".
 
 ---
 
-## Trampas ya encontradas (no repetir)
+## Particularidades de ASP.NET Core Identity encontradas en el port
 
 - `ApplicationUser` **no tiene `.Roles`** → usar `_context.UserRoles` y hacer el join a mano.
 - `base.OnModelCreating(builder)` es **obligatorio y va primero** en un `IdentityDbContext`.
